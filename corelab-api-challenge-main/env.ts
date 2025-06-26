@@ -19,5 +19,5 @@ export default {
   APP_NAME: 'CorelabTaskManager',
   DRIVE_DISK: 'local',
   NODE_ENV: 'development',
-  MONGODB_URI: 'mongodb+srv://wedsonlima:XMongo2024@cluster0.lhu8z.mongodb.net/corelab_tarefas?retryWrites=true&w=majority&appName=Cluster0',
+  MONGODB_URI: '',
 }
