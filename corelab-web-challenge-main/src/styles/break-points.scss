@@ -1,0 +1,101 @@
+// Breakpoints responsivos modernos
+$mobile-size: 575px;
+$tablet-size: 768px;
+$laptop-size: 992px;
+$desktop-size: 1200px;
+$desktop-large-size: 1400px;
+
+// Mixins para media queries
+@mixin mobile {
+  @media screen and (max-width: #{$mobile-size}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: #{$tablet-size + 1}) and (max-width: #{$laptop-size - 1}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media screen and (min-width: #{$tablet-size + 1}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: #{$laptop-size}) and (max-width: #{$desktop-size - 1}) {
+    @content;
+  }
+}
+
+@mixin laptop-up {
+  @media screen and (min-width: #{$laptop-size}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$desktop-size}) and (max-width: #{$desktop-large-size - 1}) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media screen and (min-width: #{$desktop-size}) {
+    @content;
+  }
+}
+
+@mixin desktop-large {
+  @media screen and (min-width: #{$desktop-large-size}) {
+    @content;
+  }
+}
+
+// Mixins adicionais para responsividade
+@mixin container {
+  width: 100%;
+  max-width: $desktop-large-size;
+  margin: 0 auto;
+  padding: 0 1rem;
+  
+  @include tablet-up {
+    padding: 0 2rem;
+  }
+  
+  @include desktop-up {
+    padding: 0 3rem;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin grid-responsive($columns: 1, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  
+  @include tablet-up {
+    grid-template-columns: repeat(#{$columns * 2}, 1fr);
+  }
+  
+  @include laptop-up {
+    grid-template-columns: repeat(#{$columns * 3}, 1fr);
+  }
+  
+  @include desktop-up {
+    grid-template-columns: repeat(#{$columns * 4}, 1fr);
+  }
+}

@@ -1,0 +1,385 @@
+@import '../../styles/variables.scss';
+@import '../../styles/break-points.scss';
+
+.tasksPage {
+  min-height: 100vh;
+  background: $bg-gradient;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba($white, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba($white, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+.header {
+  background: rgba($white, 0.95);
+  backdrop-filter: blur(20px);
+  padding: $spacing-2xl 0;
+  text-align: center;
+  box-shadow: $shadow-lg;
+  margin-bottom: $spacing-xl;
+  border-bottom: 1px solid rgba($white, 0.2);
+  position: relative;
+  z-index: 1;
+  
+  @include mobile {
+    padding: $spacing-xl 0;
+    margin-bottom: $spacing-lg;
+  }
+  
+  .title {
+    margin: 0 0 $spacing-sm;
+    color: $text-primary;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    background: $bg-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @include mobile {
+      font-size: $font-size-3xl;
+    }
+  }
+  
+  .subtitle {
+    margin: 0;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-light;
+    
+    @include mobile {
+      font-size: $font-size-md;
+      padding: 0 $spacing-lg;
+    }
+  }
+}
+
+.main {
+  @include container;
+  position: relative;
+  z-index: 1;
+  padding-bottom: $spacing-3xl;
+}
+
+.error {
+  background: linear-gradient(135deg, $error-color, #d32f2f);
+  color: $text-light;
+  padding: $spacing-lg $spacing-xl;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-xl;
+  @include flex-between;
+  box-shadow: $shadow-md;
+  animation: slideInDown 0.3s ease-out;
+  
+  @include mobile {
+    padding: $spacing-md $spacing-lg;
+    flex-direction: column;
+    gap: $spacing-sm;
+    text-align: center;
+  }
+  
+  .errorMessage {
+    font-weight: $font-weight-medium;
+    
+    @include mobile {
+      font-size: $font-size-sm;
+    }
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    color: $text-light;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    padding: $spacing-xs;
+    line-height: 1;
+    transition: transform $transition-fast;
+    border-radius: $border-radius-sm;
+    
+    &:hover {
+      transform: scale(1.1);
+      background: rgba($white, 0.1);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $white;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.controls {
+  @include flex-between;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-2xl;
+  padding: $spacing-xl;
+  background: rgba($white, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-lg;
+  border: 1px solid rgba($white, 0.2);
+  
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+  
+  .searchSection {
+    flex: 1;
+    max-width: 600px;
+    
+    @include mobile {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  
+  .filtersAndActions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    align-items: flex-end;
+    
+    @include mobile {
+      width: 100%;
+      align-items: stretch;
+    }
+  }
+  
+  .filters {
+    display: flex;
+    gap: $spacing-lg;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-md;
+      align-items: stretch;
+    }
+    
+    .filterGroup {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      
+      .filterLabel {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .filterOptions {
+        display: flex;
+        gap: $spacing-sm;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+    
+    .favoriteFilter {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      cursor: pointer;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      font-weight: $font-weight-medium;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius;
+      transition: all $transition-fast;
+      
+      &:hover {
+        background: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+      
+      input[type="checkbox"] {
+        accent-color: $primary-color;
+        transform: scale(1.2);
+      }
+    }
+    
+    .colorFilter {
+      display: flex;
+      gap: $spacing-xs;
+      
+      .colorOption {
+        width: 32px;
+        height: 32px;
+        border-radius: $border-radius-full;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all $transition-fast;
+        position: relative;
+        
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: $shadow-md;
+        }
+        
+        &.selected {
+          border-color: $gray-700;
+          transform: scale(1.15);
+          box-shadow: $shadow-lg;
+        }
+        
+        &.all {
+          background: linear-gradient(45deg, 
+            #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #ffeaa7 100%);
+          
+          &::after {
+            content: '✕';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: $white;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-xs;
+            text-shadow: 0 1px 2px rgba($black, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
+
+.tasksGrid {
+  display: grid;
+  gap: $spacing-lg;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+  
+  @include tablet-up {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  @include laptop-up {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  
+  @include desktop-up {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: $spacing-3xl $spacing-xl;
+  background: rgba($white, 0.9);
+  border-radius: $border-radius-lg;
+  margin: $spacing-xl 0;
+  box-shadow: $shadow-md;
+  
+  .emptyIcon {
+    font-size: 4rem;
+    color: $text-muted;
+    margin-bottom: $spacing-lg;
+  }
+  
+  .emptyTitle {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .emptyDescription {
+    font-size: $font-size-md;
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.loadingState {
+  @include flex-center;
+  padding: $spacing-3xl;
+  
+  .loadingSpinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid $gray-200;
+    border-top: 4px solid $primary-color;
+    border-radius: $border-radius-full;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.addButton {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  z-index: $z-index-fixed;
+  
+  @include mobile {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+  }
+}
+
+@include mobile {
+  .main {
+    padding-bottom: 100px;
+  }
+}
+
+.tasksGrid > * {
+  animation: fadeInUp 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+@for $i from 1 through 20 {
+  .tasksGrid > *:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.05}s;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
