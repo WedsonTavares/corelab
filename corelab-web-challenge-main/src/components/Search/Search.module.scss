@@ -1,0 +1,88 @@
+@import '../../styles/variables.scss';
+@import '../../styles/break-points.scss';
+
+.searchContainer {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  
+  .searchInput {
+    width: 100%;
+    padding: $spacing-md $spacing-lg $spacing-md 3.5rem;
+    border: 2px solid $gray-200;
+    border-radius: $border-radius-lg;
+    font-size: $font-size-md;
+    font-family: inherit;
+    background: $white;
+    transition: all $transition-smooth;
+    box-shadow: $shadow-sm;
+    
+    &::placeholder {
+      color: $text-muted;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      
+      + .searchIcon {
+        color: $primary-color;
+        transform: translateY(-50%) scale(1.1);
+      }
+    }
+    
+    &:disabled {
+      background: $gray-50;
+      cursor: not-allowed;
+      opacity: 0.7;
+      
+      + .searchIcon {
+        opacity: 0.5;
+      }
+    }
+    
+    @include mobile {
+      padding: $spacing-sm $spacing-md $spacing-sm 3rem;
+      font-size: $font-size-sm;
+    }
+  }
+  
+  .searchIcon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: $font-size-xl;
+    color: $text-muted;
+    pointer-events: none;
+    transition: all $transition-fast;
+    
+    @include mobile {
+      left: $spacing-sm;
+      font-size: $font-size-lg;
+    }
+  }
+  
+  // Estado com valor
+  &:has(.searchInput:not(:placeholder-shown)) {
+    .searchIcon {
+      color: $primary-color;
+    }
+  }
+  
+  // Animação de foco
+  &:focus-within {
+    .searchInput {
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+  }
+}
+
+// Responsividade adicional
+@include mobile {
+  .searchContainer {
+    max-width: 100%;
+  }
+}

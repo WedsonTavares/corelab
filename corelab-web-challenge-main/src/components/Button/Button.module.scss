@@ -1,0 +1,199 @@
+@import '../../styles/variables.scss';
+@import '../../styles/break-points.scss';
+
+.button {
+  padding: $spacing-md $spacing-xl;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all $transition-smooth;
+  position: relative;
+  overflow: hidden;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  box-shadow: $shadow-md;
+  @include flex-center;
+  gap: $spacing-sm;
+  min-height: 44px;
+  
+  &:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+  
+  &:not(:disabled) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: $shadow-lg;
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: $shadow-sm;
+    }
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none;
+  }
+  
+  // Ripple effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: $border-radius-full;
+    background: rgba($white, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:not(:disabled):active::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  @include mobile {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-sm;
+    min-height: 40px;
+  }
+}
+
+.primary {
+  background: $bg-gradient;
+  color: $text-light;
+  
+  &:focus-visible {
+    outline-color: $primary-color;
+  }
+  
+  &:not(:disabled):hover {
+    background: linear-gradient(135deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);
+  }
+}
+
+.secondary {
+  background: linear-gradient(135deg, $gray-600 0%, $gray-700 100%);
+  color: $text-light;
+  
+  &:focus-visible {
+    outline-color: $gray-600;
+  }
+  
+  &:not(:disabled):hover {
+    background: linear-gradient(135deg, darken($gray-600, 10%) 0%, darken($gray-700, 10%) 100%);
+  }
+}
+
+.danger {
+  background: linear-gradient(135deg, $error-color 0%, darken($error-color, 15%) 100%);
+  color: $text-light;
+  
+  &:focus-visible {
+    outline-color: $error-color;
+  }
+  
+  &:not(:disabled):hover {
+    background: linear-gradient(135deg, darken($error-color, 10%) 0%, darken($error-color, 20%) 100%);
+  }
+}
+
+.outline {
+  background: transparent;
+  border: 2px solid currentColor;
+  box-shadow: none;
+  
+  &.primary {
+    color: $primary-color;
+    
+    &:not(:disabled):hover {
+      background: $primary-color;
+      color: $text-light;
+    }
+  }
+  
+  &.secondary {
+    color: $gray-600;
+    
+    &:not(:disabled):hover {
+      background: $gray-600;
+      color: $text-light;
+    }
+  }
+  
+  &.danger {
+    color: $error-color;
+    
+    &:not(:disabled):hover {
+      background: $error-color;
+      color: $text-light;
+    }
+  }
+}
+
+.small {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  min-height: 36px;
+  
+  @include mobile {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+    min-height: 32px;
+  }
+}
+
+.large {
+  padding: $spacing-lg $spacing-2xl;
+  font-size: $font-size-lg;
+  min-height: 52px;
+  
+  @include mobile {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-md;
+    min-height: 48px;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.loading {
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: $border-radius-full;
+    animation: spin 1s linear infinite;
+  }
+  
+  * {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

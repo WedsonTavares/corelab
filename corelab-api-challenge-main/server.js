@@ -60,21 +60,33 @@ const connectDB = async () => {
       console.log('📝 Criando tarefas de exemplo...');
       await Task.insertMany([
         {
-          title: 'Primeira Tarefa',
-          description: 'Esta é uma tarefa de demonstração',
+          title: 'Estudar React',
+          description: 'Revisar hooks, context API e performance otimization',
           color: '#BAE2FF',
-          isFavorite: false
-        },
-        {
-          title: 'Tarefa Favorita',
-          description: 'Esta é uma tarefa marcada como favorita',
-          color: '#FFE4E6',
           isFavorite: true
         },
         {
-          title: 'Tarefa Verde',
-          description: 'Tarefa com cor verde',
-          color: '#D4F6CC',
+          title: 'Exercícios Matinais',
+          description: 'Corrida de 30 minutos + alongamento',
+          color: '#98FB98',
+          isFavorite: false
+        },
+        {
+          title: 'Reunião de Projeto',
+          description: 'Discutir próximas funcionalidades com a equipe',
+          color: '#FFE4B5',
+          isFavorite: true
+        },
+        {
+          title: 'Leitura do Livro',
+          description: 'Continuar lendo "Clean Code" - capítulo 5',
+          color: '#FFB6C1',
+          isFavorite: false
+        },
+        {
+          title: 'Planejamento Semanal',
+          description: 'Organizar tarefas e metas para a próxima semana',
+          color: '#DDA0DD',
           isFavorite: false
         }
       ]);
@@ -93,11 +105,29 @@ const connectDB = async () => {
 let memoryTasks = [
   {
     id: '1',
-    title: 'Primeira Tarefa (Memória)',
-    description: 'Esta é uma tarefa de demonstração em memória',
+    title: 'Estudar React (Memória)',
+    description: 'Revisar hooks, context API e performance otimization',
     color: '#BAE2FF',
+    isFavorite: true,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    title: 'Exercícios Matinais (Memória)',
+    description: 'Corrida de 30 minutos + alongamento',
+    color: '#98FB98',
     isFavorite: false,
     createdAt: new Date().toISOString(),
+  },
+  {
+    id: '3',
+    title: 'Reunião de Projeto (Memória)',
+    description: 'Discutir próximas funcionalidades com a equipe',
+    color: '#FFE4B5',
+    isFavorite: false,
+    createdAt: new Date().toISOString(),
+  }
+];
     updatedAt: new Date().toISOString()
   }
 ];

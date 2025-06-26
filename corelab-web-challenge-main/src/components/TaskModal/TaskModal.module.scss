@@ -1,0 +1,368 @@
+@import '../../styles/variables.scss';
+@import '../../styles/break-points.scss';
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($black, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: $z-index-modal;
+  @include flex-center;
+  padding: $spacing-lg;
+  animation: fadeIn 0.3s ease-out;
+  
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.modal {
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-2xl;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+  
+  @include mobile {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: $border-radius-lg;
+  }
+}
+
+.header {
+  @include flex-between;
+  padding: $spacing-xl $spacing-xl $spacing-lg;
+  border-bottom: 1px solid $gray-100;
+  position: sticky;
+  top: 0;
+  background: $white;
+  z-index: 1;
+  border-radius: $border-radius-xl $border-radius-xl 0 0;
+  
+  @include mobile {
+    padding: $spacing-lg $spacing-lg $spacing-md;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    background: $bg-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+  
+  .closeButton {
+    background: $gray-100;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+    @include flex-center;
+    cursor: pointer;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    transition: all $transition-fast;
+    
+    &:hover:not(:disabled) {
+      background: $gray-200;
+      color: $text-primary;
+      transform: scale(1.05);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+    
+    @include mobile {
+      width: 36px;
+      height: 36px;
+      font-size: $font-size-md;
+    }
+  }
+}
+
+.form {
+  padding: $spacing-lg $spacing-xl $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  
+  @include mobile {
+    padding: $spacing-md $spacing-lg $spacing-lg;
+    gap: $spacing-md;
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  .label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .input,
+  .textarea {
+    padding: $spacing-md;
+    border: 2px solid $gray-200;
+    border-radius: $border-radius-md;
+    font-size: $font-size-md;
+    font-family: inherit;
+    transition: all $transition-fast;
+    background: $white;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+    }
+    
+    &::placeholder {
+      color: $text-muted;
+    }
+    
+    &:disabled {
+      background: $gray-50;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    
+    &.inputError {
+      border-color: $error-color;
+      
+      &:focus {
+        border-color: $error-color;
+        box-shadow: 0 0 0 3px rgba($error-color, 0.1);
+      }
+    }
+    
+    @include mobile {
+      padding: $spacing-sm;
+      font-size: $font-size-sm;
+    }
+  }
+  
+  .textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+    line-height: 1.5;
+    
+    @include mobile {
+      min-height: 100px;
+    }
+  }
+  
+  .errorText {
+    color: $error-color;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-top: -$spacing-xs;
+    animation: slideInDown 0.2s ease-out;
+  }
+  
+  .charCount {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    text-align: right;
+    margin-top: -$spacing-xs;
+    
+    @include mobile {
+      font-size: 10px;
+    }
+  }
+}
+
+.colorPicker {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  
+  .colorOption {
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+    border: 3px solid $white;
+    cursor: pointer;
+    transition: all $transition-fast;
+    box-shadow: $shadow-sm;
+    position: relative;
+    
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: $shadow-md;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $text-primary;
+      outline-offset: 2px;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    &.colorSelected {
+      transform: scale(1.15);
+      box-shadow: $shadow-lg;
+      border-color: $text-primary;
+      
+      &::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $white;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-sm;
+        text-shadow: 0 1px 2px rgba($black, 0.5);
+      }
+    }
+    
+    @include mobile {
+      width: 36px;
+      height: 36px;
+      
+      &.colorSelected::after {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  padding: $spacing-sm;
+  border-radius: $border-radius-md;
+  transition: background-color $transition-fast;
+  
+  &:hover {
+    background: $gray-50;
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: $primary-color;
+    cursor: pointer;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    @include mobile {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  .checkboxText {
+    font-size: $font-size-md;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    user-select: none;
+    
+    @include mobile {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+.buttonGroup {
+  @include flex-end;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $gray-100;
+  
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: $spacing-sm;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// Animações
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Estados especiais
+.modal:focus-within {
+  .header h2 {
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
