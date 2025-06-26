@@ -1,4 +1,4 @@
-# 📝 Corelab Task Manager - Documentação Geral
+# 📝 Corelab Task - Documentação Geral
 
 Aplicação fullstack para gerenciamento de tarefas, composta por:
 
