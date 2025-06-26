@@ -3,7 +3,7 @@ const url = require('url');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 
 // Schema do MongoDB
 const taskSchema = new mongoose.Schema({
@@ -126,8 +126,6 @@ let memoryTasks = [
     color: '#FFE4B5',
     isFavorite: false,
     createdAt: new Date().toISOString(),
-  }
-];
     updatedAt: new Date().toISOString()
   }
 ];
