@@ -36,16 +36,6 @@ Desenvolvi uma aplicação fullstack completa para gerenciamento de tarefas, ate
 - **Mongoose**: ODM elegante para MongoDB com validações
 - **TypeScript**: Desenvolvimento type-safe e manutenível
 
-**Estrutura do Backend:**
-```
-app/
-├── Controllers/
-│   └── TasksController.ts     # Lógica de negócio para tarefas
-├── Models/
-│   └── Task.ts               # Modelo Mongoose com validações
-└── Services/
-    └── DatabaseService.ts    # Singleton para conexão MongoDB
-```
 
 **Decisões Arquiteturais:**
 - **Singleton Pattern** para conexão do banco de dados
@@ -62,22 +52,6 @@ app/
 - **SCSS Modules**: Estilização modular e isolada
 - **Fetch API**: Cliente HTTP nativo e leve
 
-**Estrutura do Frontend:**
-```
-src/
-├── components/
-│   ├── Button/              # Botões reutilizáveis
-│   ├── Card/               # Cards de tarefas
-│   └── Search/             # Barra de busca
-├── pages/
-│   └── Tasks/              # Página principal de tarefas
-├── lib/
-│   └── api.ts             # Cliente da API REST
-├── types/
-│   └── Task.ts            # Interfaces TypeScript
-└── styles/
-    └── break-points.scss  # Breakpoints responsivos
-```
 
 **Decisões de Design:**
 - **Mobile-First**: Interface pensada primeiro para mobile
