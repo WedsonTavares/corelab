@@ -89,7 +89,7 @@ Este projeto foi totalmente refatorado para o domínio de tarefas, com integraç
 
 ## 👨‍💻 Autor
 
-Wedson Lima
+Wedson Tavares
 
 ---
 
