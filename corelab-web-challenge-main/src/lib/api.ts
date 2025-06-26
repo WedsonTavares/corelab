@@ -3,7 +3,7 @@ import { ITarefa, IFormularioTarefa, IFiltrosTarefa } from '../types/Task'
 /**
  * Configuração da API - URL base do backend
  */
-const API_BASE_URL = "http://localhost:3333"; // Backend com MongoDB
+const API_BASE_URL = "http://localhost:52875"; // Backend com MongoDB
 
 /**
  * Constrói o endpoint completo
